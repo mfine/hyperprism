@@ -4,8 +4,9 @@ import qualified Github.Repos as Github
 import Github.Auth
 import Data.List
 import Data.Maybe
+import Data.Monoid (mempty)
 
-import Options.Applicative
+import Options.Applicative (execParser,info,short,long,metavar,help,strOption,(<>))
 import System.Environment (getEnv)
 
 type ApiKey = String
@@ -14,13 +15,12 @@ type Org = String
 getApiKey :: IO ApiKey
 getApiKey = getEnv "GITHUB_API_KEY"
 
-parseOrg :: Parser Org
-parseOrg = strOption $
-  short 'o' <> long "org" <> metavar "ORG" <> help "Org to crawl"
-
 getOrg :: IO Org
-getOrg = execParser
-  (info (helper <*> parseOrg) $ progDesc "Crawl an org's github repos")
+getOrg = execParser $
+  info parseOrg mempty
+  where
+    parseOrg = strOption $
+      short 'o' <> long "org" <> metavar "ORG" <> help "Org to crawl"
 
 main :: IO ()
 main = do
