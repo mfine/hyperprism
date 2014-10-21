@@ -23,6 +23,7 @@ library
 executable hyperprism
   main-is:             Main.hs
   build-depends:       base,
+                       github,
                        hyperprism,
                        optparse-applicative
   default-language:    Haskell2010
