@@ -11,10 +11,19 @@ category:            Web
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable hyperprism
-  main-is:             Main.hs
-  build-depends:       base >=4.7 && <4.8,
+library
+  exposed-modules:     Hyperprism
+  build-depends:       base,
                        github,
                        postgresql-simple
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  ghc-options:         -Wall -threaded
+
+executable hyperprism
+  main-is:             Main.hs
+  build-depends:       base,
+                       hyperprism,
+                       optparse-applicative
   default-language:    Haskell2010
   ghc-options:         -Wall -threaded
