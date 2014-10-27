@@ -9,15 +9,17 @@ import System.Environment (getEnv)
 getApiKey :: IO ApiKey
 getApiKey = getEnv "GITHUB_API_KEY"
 
-getOrg :: IO Org
-getOrg = execParser $
-  info parseOrg mempty
+getOrgName :: IO OrgName
+getOrgName = execParser $
+  info parseOrgName mempty
   where
-    parseOrg = strOption $
-      short 'o' <> long "org" <> metavar "ORG" <> help "Org to crawl"
+    parseOrgName = strOption $
+      short 'o' <> long "org-name" <> metavar "ORG-NAME" <> help "Org name to crawl"
+
 
 main :: IO ()
 main = do
   apiKey <- getApiKey
-  org <- getOrg
-  dumpRepos apiKey org
+  org <- getOrgName
+  dumpCommits apiKey org
+

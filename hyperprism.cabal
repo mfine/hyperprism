@@ -16,7 +16,6 @@ library
   build-depends:       base,
                        github,
                        postgresql-simple
-  hs-source-dirs:      src
   default-language:    Haskell2010
   ghc-options:         -Wall -threaded
 
